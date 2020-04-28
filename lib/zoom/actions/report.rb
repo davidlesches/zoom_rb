@@ -24,7 +24,7 @@ module Zoom
       def meeting_participants_report(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id])
-        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_id]}/participants", query: options.except(:meeting_id), headers: request_headers)
+        Utils.parse_response self.class.get("/report/meetings/#{options[:meeting_id]}/participants", query: options.except(:meeting_id), headers: request_headers)
       end
 
       def meeting_polls_report(*args)
