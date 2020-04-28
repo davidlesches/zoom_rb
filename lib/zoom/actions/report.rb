@@ -22,7 +22,9 @@ module Zoom
       end
 
       def meeting_participants_report(*args)
-        # TODO: implement meeting_participants_report
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id])
+        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_id]}/participants", query: options.except(:meeting_id), headers: request_headers)
       end
 
       def meeting_polls_report(*args)
@@ -34,9 +36,7 @@ module Zoom
       end
 
       def webinar_participants_report(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(:page_size, :next_page_token)
-        Utils.parse_response self.class.get("/report/webinars/#{params[:id]}/participants", query: params.except(:id).merge(access_token: access_token))
+        # TODO: implement webinar_participants_report
       end
 
       def webinar_polls_report(*args)
