@@ -80,7 +80,7 @@ module Zoom
       def meeting_registrants_list(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id])
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
+        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/registrants", query: options.except(:meeting_id), headers: request_headers)
       end
 
       # Retrieve ended meeting details
