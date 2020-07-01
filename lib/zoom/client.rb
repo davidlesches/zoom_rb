@@ -40,5 +40,9 @@ module Zoom
     def access_token
       JWT.encode({ iss: @api_key, exp: Time.now.to_i + @timeout }, @api_secret, 'HS256', { typ: 'JWT' })
     end
+
+    def long_access_token # for video downloads
+      JWT.encode({ iss: @api_key, exp: Time.now.to_i + 600 }, @api_secret, 'HS256', { typ: 'JWT' })
+    end
   end
 end
